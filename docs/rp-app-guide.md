@@ -27,7 +27,7 @@ passkey-app 에 위임: WebAuthn 의식 처리, challenge/credential 저장, ID 
 ## 3. 빠른 시작
 
 ```bash
-./gradlew :rp-app:bootRun --args="--spring.profiles.active=local"
+./gradlew bootRun --args="--spring.profiles.active=local"
 ```
 
 `local` 프로필은 데모 값으로 채워져 있다(passkey-app :8080, demo-rp 테넌트).

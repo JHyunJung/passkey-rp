@@ -8,8 +8,8 @@ deploy/
 *.iml
 .vscode/
 
-# rp-app 런타임 데이터(InMemoryUserStore 영속 파일)
-rp-app/data/
+# 런타임 데이터(InMemoryUserStore 영속 파일)
+data/
 
 # OS
 .DS_Store

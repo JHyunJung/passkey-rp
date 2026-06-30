@@ -8,31 +8,31 @@ passkey-app(패스키 서버)과 연동하는 **RP(Relying Party) 서버 샘플*
 
 | 경로 | 내용 |
 |---|---|
-| `rp-app/` | 샘플 RP 서버(Spring Boot). 등록/인증 중계·사용자 매핑·well-known 호스팅. |
+| `src/` | 샘플 RP 서버(Spring Boot, 단일 프로젝트). 등록/인증 중계·사용자 매핑·well-known 호스팅. |
 | `libs/sdk-java-1.0.0.jar` | RP가 임베드하는 SDK 라이브러리(+ `-sources.jar`). |
-| `docs/rp-app-guide.md` | rp-app 사용자 가이드(설정·보안·교체 포인트). |
+| `docs/rp-app-guide.md` | RP 서버 사용자 가이드(설정·보안·교체 포인트). |
 | `docs/sdk-java-guide.md` | SDK 사용자 가이드(API·ID Token 검증·릴레이 코덱). |
 
 ## 빌드 / 실행
 
 ```bash
 # 실행 가능한 jar 생성 → deploy/rp-app.jar
-./gradlew :rp-app:bootJar
+./gradlew bootJar
 
 # 또는 개발 모드 실행
-./gradlew :rp-app:bootRun
+./gradlew bootRun
 
 # 테스트
-./gradlew :rp-app:test
+./gradlew test
 ```
 
 Java 17 + Spring Boot 3.5.14 + Gradle wrapper(8.10) 포함. 별도 Gradle 설치 불필요.
-빌드 산출물(`build/`, `deploy/`)과 런타임 데이터(`rp-app/data/`)는 `.gitignore` 대상이며,
+빌드 산출물(`build/`, `deploy/`)과 런타임 데이터(`data/`)는 `.gitignore` 대상이며,
 `deploy/rp-app.jar` 는 `bootJar` 실행 시 생성된다.
 
 ## 필수 설정
 
-rp-app 은 외부 passkey-app 백엔드를 호출한다. 다음을 환경변수/yml 로 주입한다(상세는
+RP 서버는 외부 passkey-app 백엔드를 호출한다. 다음을 환경변수/yml 로 주입한다(상세는
 [docs/rp-app-guide.md](docs/rp-app-guide.md)):
 
 - `PASSKEY_BASE_URL` — passkey-app 베이스 URL
@@ -45,7 +45,7 @@ rp-app 은 외부 passkey-app 백엔드를 호출한다. 다음을 환경변수/
 
 새 SDK 버전을 받으면:
 1. `libs/` 의 `sdk-java-*.jar` 를 교체한다.
-2. `rp-app/build.gradle.kts` 의 `files("$rootDir/libs/sdk-java-1.0.0.jar")` 파일명을 갱신한다.
+2. `build.gradle.kts` 의 `files("$rootDir/libs/sdk-java-1.0.0.jar")` 파일명을 갱신한다.
 
 SDK 사용법은 [docs/sdk-java-guide.md](docs/sdk-java-guide.md) 참고.
 

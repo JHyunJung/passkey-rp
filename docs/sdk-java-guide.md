@@ -39,10 +39,10 @@ RP 가 다루는 4개 토큰의 출처·이동:
 
 ## 2. 설치
 
-이 패키지에는 빌드된 SDK 가 `libs/sdk-java-1.0.0.jar` 로 포함되어 있다. RP 모듈에서 로컬 jar 로 의존한다:
+이 패키지에는 빌드된 SDK 가 `libs/sdk-java-1.0.0.jar` 로 포함되어 있다. RP 프로젝트에서 로컬 jar 로 의존한다:
 
 ```kotlin
-// rp-app/build.gradle.kts
+// build.gradle.kts
 dependencies {
     implementation(files("$rootDir/libs/sdk-java-1.0.0.jar"))
     // jar 에는 POM 이 없어 transitive 가 따라오지 않으므로 SDK 의 런타임 의존을 직접 선언한다:
@@ -223,8 +223,8 @@ try {
 
 ## 10. 참조 통합 예제
 
-이 패키지의 `rp-app` 모듈이 SDK 의 레퍼런스 소비자다:
-- `rp-app/src/main/java/.../config/PasskeyClientConfiguration.java` — Spring `@Bean` 으로
+이 패키지의 RP 서버가 SDK 의 레퍼런스 소비자다:
+- `src/main/java/.../config/PasskeyClientConfiguration.java` — Spring `@Bean` 으로
   `PasskeyClient` 와 `RegistrationRelayCodec` 구성(동적 API Key Supplier 핫리로드 포함).
-- `rp-app/src/main/java/.../web/WebAuthnController.java` — 등록/인증 4종 + 3-인자
+- `src/main/java/.../web/WebAuthnController.java` — 등록/인증 4종 + 3-인자
   `verifyIdToken`(iss/aud) 검증 호출 흐름.
