@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Sample RP — Home')}"></head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+
+<h1>Sample RP</h1>
+
+<div>
+  <p>이 페이지는 Passkey2 의 RP API 통합을 sdk-java 로 시연하는 데모입니다.</p>
+  <p><a href="/register">Register</a> 후 <a href="/login">Login</a> 으로 진행하세요.</p>
+  <p>무상태 데모입니다 — 로그인 결과는 <a href="/login">Login</a> 페이지에서 확인하세요.</p>
+</div>
+</body>
+</html>
