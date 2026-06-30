@@ -26,7 +26,9 @@ passkey-app(패스키 서버)과 연동하는 **RP(Relying Party) 서버 샘플*
 ./gradlew :rp-app:test
 ```
 
-Java 17 + Gradle wrapper(8.10) 포함. 별도 Gradle 설치 불필요.
+Java 17 + Spring Boot 3.5.14 + Gradle wrapper(8.10) 포함. 별도 Gradle 설치 불필요.
+빌드 산출물(`build/`, `deploy/`)과 런타임 데이터(`rp-app/data/`)는 `.gitignore` 대상이며,
+`deploy/rp-app.jar` 는 `bootJar` 실행 시 생성된다.
 
 ## 필수 설정
 
