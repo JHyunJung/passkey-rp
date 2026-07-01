@@ -47,14 +47,14 @@ class PasskeyClientWiringIT {
     ApplicationContext ctx;
 
     @Test
-    void dynamicApiKeyBeansAreWired() {
+    void apiKeyBeansAreWired() {
         assertThat(ctx.containsBean("apiKeySupplier")).isTrue();
         assertThat(ctx.getBean(com.crosscert.passkey.sdk.PasskeyClient.class)).isNotNull();
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    void supplierFallsBackToEnvWhenNoFileConfigured() {
+    void supplierReturnsEnvApiKey() {
         var supplier = (Supplier<String>) ctx.getBean("apiKeySupplier");
         assertThat(supplier.get()).isEqualTo("pk_envFallbackKey");
     }
