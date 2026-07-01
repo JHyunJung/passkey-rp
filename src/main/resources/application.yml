@@ -20,6 +20,8 @@ rp-app:
 
 passkey:
   base-url:    ${PASSKEY_BASE_URL:http://localhost:8080}
+  # passkey-app 발급 API Key(X-API-Key). 기동 시 1회 읽어 고정 사용하므로,
+  # 키를 교체하려면 이 값을 바꾼 뒤 재기동한다(무중단 핫리로드는 지원하지 않음).
   api-key:     ${PASSKEY_API_KEY:}
   tenant-id:   ${PASSKEY_TENANT_ID:}
   # passkey-app 의 IdTokenIssuer 가 발급하는 iss prefix. passkey-app 의

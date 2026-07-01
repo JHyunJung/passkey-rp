@@ -97,6 +97,7 @@ passkey-app 을 `-Dpasskey.id-token.issuer-base=http://localhost:8080` 으로 �
 - **CORS**: 정확한 origin 목록만. 와일드카드·요청 Origin 반사 금지(`CorsProperties`).
 - **로그 마스킹**: API Key·JWT·password 등을 출력 시점에 가린다(`SecretRedactor`).
 - **무상태/CSRF**: 서버 세션을 두지 않으므로 STATELESS + CSRF 비활성(`WebSecurityConfig`). 토큰 릴레이로 단계를 잇는다.
+- **API Key 교체**: `passkey.api-key`(env `PASSKEY_API_KEY`)는 기동 시 1회 읽혀 고정된다. 키를 회전/폐기하려면 env 를 갱신하고 재기동한다(파일 기반 무중단 핫리로드는 제거됨).
 
 ## 8. SDK 연동
 

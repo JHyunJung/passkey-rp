@@ -18,8 +18,9 @@ import java.util.function.Supplier;
 public class PasskeyClientConfiguration {
 
     /**
-     * SDK 가 매 요청 get() 을 호출하지만, RP 레퍼런스는 기동 시 env(api-key) 값을
-     * 한 번 읽어 고정 공급한다. 키 교체는 재기동으로 반영한다.
+     * SDK 는 매 요청 get() 을 호출하지만(런타임 키 교체를 허용하는 계약), RP 레퍼런스는
+     * 기동 시 env(passkey.api-key)를 한 번 읽어 고정 공급한다. 따라서 키를 교체하려면
+     * PASSKEY_API_KEY(또는 application.yml 의 api-key)를 바꾼 뒤 애플리케이션을 재기동한다.
      */
     @Bean
     public Supplier<String> apiKeySupplier(PasskeyProperties props) {
