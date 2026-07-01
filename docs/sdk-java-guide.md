@@ -97,10 +97,14 @@ RegistrationRelayCodec relay = new RegistrationRelayCodec(
 | clock | `Clock` | systemUTC | (테스트용) 시계 |
 | traceIdProvider | `Supplier<String>` | `MDC.get("traceId")` | X-Trace-Id 전파 소스 |
 
-**API Key Supplier:** `apiKeySupplier` 는 부팅 시 1회가 아니라 **매 요청 시점**에 호출된다.
-Supplier 구현에 따라 동적 교체도 가능하나, 본 패키지의 RP 레퍼런스는 기동 시 env(api-key)
-값을 캡처해 고정 공급한다(키 교체는 재기동으로 반영). 반환값이 null/blank 면 그 요청은
-`PasskeyConfigurationException` 으로 fail-fast.
+**API Key Supplier (SDK 계약):** `apiKeySupplier` 는 부팅 시 1회가 아니라 **매 요청 시점**에
+호출된다. 반환값이 null/blank 면 그 요청은 `PasskeyConfigurationException` 으로 fail-fast.
+Supplier 구현을 시크릿 매니저·파일 감시 등에 연결하면 재기동 없는 키 교체도 가능하다.
+
+**RP 레퍼런스의 선택:** 본 패키지의 RP(`PasskeyClientConfiguration`)는 기동 시
+env(`passkey.api-key`)를 한 번 캡처해 고정 공급한다. 키 교체는 env 갱신 후 재기동으로 반영한다
+(운영 단순성을 위해 파일 핫리로드는 두지 않음). 무중단 교체가 필요하면 이 빈만 Supplier
+구현으로 바꾸면 된다.
 
 **RegistrationRelayCodec 생성자 인자** — `new RegistrationRelayCodec(secret, ttl, clock)`:
 
