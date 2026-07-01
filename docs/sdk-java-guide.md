@@ -97,9 +97,10 @@ RegistrationRelayCodec relay = new RegistrationRelayCodec(
 | clock | `Clock` | systemUTC | (테스트용) 시계 |
 | traceIdProvider | `Supplier<String>` | `MDC.get("traceId")` | X-Trace-Id 전파 소스 |
 
-**동적 API Key:** `apiKeySupplier` 는 부팅 시 1회가 아니라 **매 요청 시점**에 호출된다. 따라서
-Supplier 뒤편(파일/시크릿 매니저)에서 키를 교체하면 재기동 없이 다음 요청부터 반영된다. 반환값이
-null/blank 면 그 요청은 `PasskeyConfigurationException` 으로 fail-fast.
+**API Key Supplier:** `apiKeySupplier` 는 부팅 시 1회가 아니라 **매 요청 시점**에 호출된다.
+Supplier 구현에 따라 동적 교체도 가능하나, 본 패키지의 RP 레퍼런스는 기동 시 env(api-key)
+값을 캡처해 고정 공급한다(키 교체는 재기동으로 반영). 반환값이 null/blank 면 그 요청은
+`PasskeyConfigurationException` 으로 fail-fast.
 
 **RegistrationRelayCodec 생성자 인자** — `new RegistrationRelayCodec(secret, ttl, clock)`:
 
@@ -225,6 +226,6 @@ try {
 
 이 패키지의 RP 서버가 SDK 의 레퍼런스 소비자다:
 - `src/main/java/.../config/PasskeyClientConfiguration.java` — Spring `@Bean` 으로
-  `PasskeyClient` 와 `RegistrationRelayCodec` 구성(동적 API Key Supplier 핫리로드 포함).
+  `PasskeyClient` 와 `RegistrationRelayCodec` 구성(고정 env API Key Supplier).
 - `src/main/java/.../web/WebAuthnController.java` — 등록/인증 4종 + 3-인자
   `verifyIdToken`(iss/aud) 검증 호출 흐름.
